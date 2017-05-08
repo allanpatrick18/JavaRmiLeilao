@@ -5,14 +5,15 @@
  */
 package cliente;
 
+import java.io.Serializable;
 import servidor.*;
 
 /**
  *
  * @author allan
  */
-public class Produto {
-    
+public class Produto implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer id;
     private String name;
     private String descricao;

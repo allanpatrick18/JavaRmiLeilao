@@ -6,6 +6,9 @@
 package InterfaceGrafica;
 
 import interfaces.InterfaceServidor;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -119,6 +122,11 @@ public class InicialMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void leiloarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leiloarActionPerformed
+        try {
+            p.atualiza();
+        } catch (RemoteException ex) {
+            Logger.getLogger(InicialMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         p.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_leiloarActionPerformed
@@ -134,11 +142,6 @@ public class InicialMenu extends javax.swing.JFrame {
        
     }//GEN-LAST:event_casdastroActionPerformed
 
-    public void atualizaTabela(){
-    
-    
-    
-    }
     /**
      * @param args the command line arguments
      */
