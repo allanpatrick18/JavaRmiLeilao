@@ -13,6 +13,8 @@ import java.rmi.server.RMIServerSocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -23,6 +25,7 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
     private static final long serialVersionUID = 1L;
     private static InterfaceServidor inface = null;
     private static List<Processo> processos = new ArrayList<>();
+    private static List<Leilao> produtosLeilao = new ArrayList<>();
 
     public Controle() throws RemoteException {
     }
@@ -48,54 +51,94 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
     }
 
     @Override
-    public boolean cadastrarProduto(int idCliente ,String nomeProduto, String precoIncial, String descricao, String tempo) throws RemoteException {
+    public boolean cadastrarProduto(int idCliente, String nomeProduto, String precoIncial, String descricao, String tempo) throws RemoteException {
         Processo p = procuraCliente(idCliente);
-        if(p!=null){
-          p.getListaProduto().add(new Produto(nomeProduto,precoIncial,descricao,tempo));
+        if (p != null) {
+            p.getListaProduto().add(new Produto(nomeProduto, precoIncial, descricao, tempo));
         }
 
         return true;
     }
+
     @Override
     public List<Produto> listarProdutos(int idCliente) throws RemoteException {
-       return procuraProdutos(idCliente);
+        return procuraProdutosdeUmCliente(idCliente);
     }
 
     @Override
-    public boolean teste(int idCliente ,String nomeProduto) throws RemoteException {
+    public boolean teste(int idCliente, String nomeProduto) throws RemoteException {
         System.out.println(idCliente);
         System.out.println(nomeProduto);
-        System.out.println("ok'''''''");
         return true;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    private Processo procuraCliente(int idCliente){
-        for(Processo p : processos){
-           if(idCliente==p.getId()){
-             return p;
-           }
-        }    
-        return null;
+
+    @Override
+    public boolean leioloar(int idProcesso, int idProduto) throws RemoteException {
+        Produto produto = procuraProdutos(idProduto);
+        if (produto != null) {
+            int id = produtosLeilao.size() + 1;
+            Leilao leilao = new Leilao();
+            leilao.setId(id);
+            leilao.setProceso(procuraCliente(idProcesso));
+            leilao.setProduto(produto);
+            produtosLeilao.add(leilao);
+            return true;
+        }
+        return false;
+
     }
-    
-    private  List<Produto> procuraProdutos(int idCliente){
-        for(Processo p : processos){
-           if(idCliente==p.getId()){
-             return p.getListaProduto();
-           }
-        }    
-        return null;
+
+    @Override
+    public boolean darlance(int idCliente, int idProduto, double valor) throws RemoteException {
+        
+        
+        
+      return false;
     }
     
     
+
+    private Processo procuraCliente(int idCliente) {
+        for (Processo p : processos) {
+            if (idCliente == p.getId()) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    private List<Produto> procuraProdutosdeUmCliente(int idCliente) {
+        for (Processo p : processos) {
+            if (idCliente == p.getId()) {
+                return p.getListaProduto();
+            }
+        }
+        return null;
+    }
+
+    private Produto procuraProdutos(int idProduto) {
+        for (Processo p : processos) {
+            for (Produto prod : p.getListaProduto()) {
+                if (idProduto == prod.getId()) {
+                    return prod;
+                }
+            }
+        }
+        return null;
+    }
+    private Produto procuraProdutoLeiloando(int idProduto) {
+//        for (Leilao leilao : produtosLeilao) {
+//            for (Produto prod : leilao.getProceso()) {
+//                if (idProduto == prod.getId()) {
+//                    return prod;
+//                }
+//            }
+//        }
+        return null;
+    }
+
+    private void inicailizaLeilao() {
+        
+    }
 
 }
