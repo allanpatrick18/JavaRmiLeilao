@@ -164,9 +164,12 @@ public class ProductList extends javax.swing.JFrame {
     public void atualiza() throws RemoteException {                                       
       List<Produto> p =controle.listarProdutos(id);
       DefaultTableModel yourModel = (DefaultTableModel) meusProdutos.getModel();
+      
       for (Produto pro :p){
-          yourModel.addRow(new Object[]{pro.getName(),pro.getDescricao(),Integer.parseInt(pro.getPrecoInicial())});
+          yourModel.addRow(new Object[]{pro.getName(),pro.getDescricao(),Integer.parseInt(pro.getPrecoInicial()), pro.getDescricao(),
+          Integer.parseInt(pro.getTempoFinal())});
       }
+      
       
      
      

@@ -20,6 +20,10 @@ public interface InterfaceServidor extends Remote {
   
   boolean cadastrarProduto(int idCliente ,String nomeProduto, String precoIncial, String descricao, String tempo) throws RemoteException;
   
+  boolean leioloar(int idCliente, int idProduto)throws RemoteException;
+  
+  boolean darlance(int idCliente, int idProduto, double valor)throws RemoteException;
+  
   boolean teste(int idCliente, String nomeProduto)throws RemoteException;
  
   List<Produto> listarProdutos(int idCliente) throws RemoteException;
