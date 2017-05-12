@@ -79,7 +79,7 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
             int id = produtosLeilao.size() + 1;
             Leilao leilao = new Leilao();
             leilao.setId(id);
-            leilao.setProceso(procuraCliente(idProcesso));
+//            leilao.setProceso(procuraCliente(idProcesso));
             leilao.setProduto(produto);
             produtosLeilao.add(leilao);
             return true;
