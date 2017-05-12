@@ -25,7 +25,10 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
     private static final long serialVersionUID = 1L;
     private static InterfaceServidor inface = null;
     private static List<Processo> processos = new ArrayList<>();
-    private static List<Leilao> produtosLeilao = new ArrayList<>();
+    public static List<Produto> produtosLeilao = new ArrayList<>();
+    private Integer incrIDProd;
+    
+    
 
     public Controle() throws RemoteException {
     }
@@ -51,11 +54,20 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
     }
 
     @Override
-    public boolean cadastrarProduto(int idCliente, String nomeProduto, String precoIncial, String descricao, String tempo) throws RemoteException {
+    public boolean cadastrarLeilao(int idCliente, String nomeProduto, Integer precoIncial,
+            String descricao, Integer tempo) throws RemoteException {
         Processo p = procuraCliente(idCliente);
         if (p != null) {
-            p.getListaProduto().add(new Produto(nomeProduto, precoIncial, descricao, tempo));
+            incrIDProd++;
+            Produto produto = new Produto(incrIDProd, nomeProduto,descricao, precoIncial, tempo);
+            p.getListaProduto().add(produto);
+            produtosLeilao.add(produto);
         }
+               Temporizador temporizador = new Temporizador(tempo);
+               Thread  thread= new Thread(temporizador);
+     
+               thread.start();
+               
 
         return true;
     }
@@ -72,31 +84,23 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
         return true;
     }
 
+
+
     @Override
-    public boolean leioloar(int idProcesso, int idProduto) throws RemoteException {
-        Produto produto = procuraProdutos(idProduto);
-        if (produto != null) {
-            int id = produtosLeilao.size() + 1;
-            Leilao leilao = new Leilao();
-            leilao.setId(id);
-//            leilao.setProceso(procuraCliente(idProcesso));
-            leilao.setProduto(produto);
-            produtosLeilao.add(leilao);
-            return true;
+    public boolean darlance(int idProcesso, int idProduto, Integer valor) throws RemoteException {
+        Leilao leilao = procuraProdutoLeiloando(idProduto);
+        if (leilao != null) {
+            Integer valorAtual = Integer.parseInt(leilao.getProduto().getPrecoInicial());
+            if (valorAtual < valor) {
+               leilao.getLancadores().add(procuraCliente(idProcesso));
+               leilao.getProduto().setPrecoInicial(valor.toString());
+              
+               
+            }
+
         }
         return false;
-
     }
-
-    @Override
-    public boolean darlance(int idCliente, int idProduto, double valor) throws RemoteException {
-        
-        
-        
-      return false;
-    }
-    
-    
 
     private Processo procuraCliente(int idCliente) {
         for (Processo p : processos) {
@@ -126,19 +130,22 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
         }
         return null;
     }
-    private Produto procuraProdutoLeiloando(int idProduto) {
-//        for (Leilao leilao : produtosLeilao) {
-//            for (Produto prod : leilao.getProceso()) {
-//                if (idProduto == prod.getId()) {
-//                    return prod;
-//                }
-//            }
-//        }
+
+    private Leilao procuraProdutoLeiloando(int idProduto) {
+        for (Leilao leilao : produtosLeilao) {
+            for (Processo processo : leilao.getLancadores()) {
+                for (Produto produto : processo.getListaProduto()) {
+                    if (idProduto == processo.getId()) {
+                        return leilao;
+                    }
+                }
+            }
+        }
         return null;
     }
 
     private void inicailizaLeilao() {
-        
+
     }
 
 }

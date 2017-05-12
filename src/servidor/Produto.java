@@ -6,6 +6,8 @@
 package servidor;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,15 +18,36 @@ public class Produto implements Serializable{
     private Integer id;
     private String name;
     private String descricao;
-    private String precoInicial;
-    private String tempoFinal;
+    private Integer precoInicial;
+    private Integer tempoFinal;
+    private List<Processo> processoInteressados = new ArrayList<>();
+    private Process ultimoLancador; //ultimo cara que deu o lance
+    private Integer precoFinal;
 
-    Produto(String nomeProduto,String precoIncial, String descricao, String tempo) {
-        this.name= nomeProduto;
+    public Produto(Integer id, String name, String descricao, Integer precoInicial, Integer tempoFinal) {
+        this.id = id;
+        this.name = name;
         this.descricao = descricao;
-        this.precoInicial = precoIncial;
-        this.tempoFinal = tempo;
+        this.precoInicial = precoInicial;
+        this.tempoFinal = tempoFinal;
     }
+
+    public List<Processo> getProcessoInteressados() {
+        return processoInteressados;
+    }
+
+    public void setProcessoInteressados(List<Processo> processoInteressados) {
+        this.processoInteressados = processoInteressados;
+    }
+
+    public Process getUltimoLancador() {
+        return ultimoLancador;
+    }
+
+    public void setUltimoLancador(Process ultimoLancador) {
+        this.ultimoLancador = ultimoLancador;
+    }
+
 
     public Integer getId() {
         return id;
@@ -50,21 +73,22 @@ public class Produto implements Serializable{
         this.descricao = descricao;
     }
 
-    public String getPrecoInicial() {
+    public Integer getPrecoInicial() {
         return precoInicial;
     }
 
-    public void setPrecoInicial(String precoInicial) {
+    public void setPrecoInicial(Integer precoInicial) {
         this.precoInicial = precoInicial;
     }
 
-    public String getTempoFinal() {
+    public Integer getTempoFinal() {
         return tempoFinal;
     }
 
-    public void setTempoFinal(String tempoFinal) {
+    public void setTempoFinal(Integer tempoFinal) {
         this.tempoFinal = tempoFinal;
     }
+
     
     
     

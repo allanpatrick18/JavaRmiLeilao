@@ -5,6 +5,7 @@
  */
 package servidor;
 
+import cliente.InterfaceCliente;
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
@@ -21,6 +22,10 @@ public class Server {
        
         Registry registro = LocateRegistry.createRegistry(4370);
         registro.bind("controle", Controle.getInstance());
+        
+        InterfaceCliente interfaceCliente = (InterfaceCliente) registro.lookup("controle");
+                
+       
         System.out.println("Servidor do banco iniciado!");
 
     }

@@ -15,7 +15,8 @@ import java.util.List;
 public class Leilao {
     private int id;
     private Produto produto;
-    private List<Processo> proceso = new ArrayList<>();
+    private Processo proprietario;
+    private List<Processo> lancadores = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -33,13 +34,26 @@ public class Leilao {
         this.produto = produto;
     }
 
-    public List<Processo> getProceso() {
-        return proceso;
+    public Processo getProprietario() {
+        return proprietario;
     }
 
-    public void setProceso(List<Processo> proceso) {
-        this.proceso = proceso;
+    public void setProprietario(Processo proprietario) {
+        this.proprietario = proprietario;
     }
+
+    
+
+    public List<Processo> getLancadores() {
+        return lancadores;
+    }
+
+    public void setLancadores(List<Processo> lancadores) {
+        this.lancadores = lancadores;
+    }
+
+
+
     
     
     

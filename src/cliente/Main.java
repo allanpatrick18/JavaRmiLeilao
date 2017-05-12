@@ -13,14 +13,16 @@ import java.rmi.registry.Registry;
 import java.util.Scanner;
 
 import java.lang.management.ManagementFactory;
+import java.rmi.AlreadyBoundException;
 import java.util.Random;
+import servidor.Controle;
 
 public class Main {
     
    public static InterfaceServidor  controle = null;
    public static Integer id;
    
-    public static void criaIdenficacao(InterfaceServidor gerente) throws RemoteException {
+    public static void criaIdenficacao(InterfaceServidor gerente) throws RemoteException, MalformedURLException, AlreadyBoundException {
         String name = ManagementFactory.getRuntimeMXBean().getName();
         String[] idString= name.split("@");
         id = Integer.parseInt(idString[0].toString());
@@ -28,7 +30,7 @@ public class Main {
 
     }
 
-    public static void main(String[] args) throws MalformedURLException, RemoteException, NotBoundException {
+    public static void main(String[] args) throws MalformedURLException, RemoteException, NotBoundException, AlreadyBoundException {
 
         Registry registro = LocateRegistry.getRegistry(4370);
         controle = (InterfaceServidor) registro.lookup("controle");
@@ -39,6 +41,10 @@ public class Main {
                 new InicialMenu().setVisible(true);
             }
         });
+        
+  
+        
+        
     }
 
 }

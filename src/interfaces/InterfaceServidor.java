@@ -18,11 +18,11 @@ public interface InterfaceServidor extends Remote {
     
   public void instanciaUmCliente(int id) throws RemoteException;
   
-  boolean cadastrarProduto(int idCliente ,String nomeProduto, String precoIncial, String descricao, String tempo) throws RemoteException;
+  public boolean cadastrarLeilao(int idCliente, String nomeProduto, Integer precoIncial,
+            String descricao, Integer tempo) throws RemoteException;
   
-  boolean leioloar(int idCliente, int idProduto)throws RemoteException;
-  
-  boolean darlance(int idCliente, int idProduto, double valor)throws RemoteException;
+ 
+  boolean darlance(int idCliente, int idProduto, Integer valor)throws RemoteException;
   
   boolean teste(int idCliente, String nomeProduto)throws RemoteException;
  
