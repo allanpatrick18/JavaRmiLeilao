@@ -36,6 +36,8 @@ public class Temporizador extends Thread{
                     
                     //Aqui chamar funcao do Controle
                     
+                    
+                    
                 }else{
                     System.out.println("Erro : Nenhum apostador no produto!");
                 

@@ -62,15 +62,18 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
             Produto produto = new Produto(incrIDProd, nomeProduto,descricao, precoIncial, tempo);
             p.getListaProduto().add(produto);
             produtosLeilao.add(produto);
-        }
-               Temporizador temporizador = new Temporizador(tempo);
+       
+               Temporizador temporizador = new Temporizador(tempo, produto);
                Thread  thread= new Thread(temporizador);
      
                thread.start();
-               
+        }      
 
         return true;
     }
+    
+    
+    
 
     @Override
     public List<Produto> listarProdutos(int idCliente) throws RemoteException {
@@ -144,8 +147,6 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
         return null;
     }
 
-    private void inicailizaLeilao() {
-
-    }
+    
 
 }

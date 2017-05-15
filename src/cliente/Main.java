@@ -22,11 +22,11 @@ public class Main {
    public static InterfaceServidor  controle = null;
    public static Integer id;
    
-    public static void criaIdenficacao(InterfaceServidor gerente) throws RemoteException, MalformedURLException, AlreadyBoundException {
+    public static void criaIdenficacao(InterfaceServidor servidor) throws RemoteException, MalformedURLException, AlreadyBoundException {
         String name = ManagementFactory.getRuntimeMXBean().getName();
         String[] idString= name.split("@");
-        id = Integer.parseInt(idString[0].toString());
-        gerente.instanciaUmCliente(id);
+        id = Integer.parseInt(idString[0]);
+        servidor.instanciaUmCliente(id);
 
     }
 
@@ -37,6 +37,7 @@ public class Main {
         criaIdenficacao(controle);
        
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new InicialMenu().setVisible(true);
             }
