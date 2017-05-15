@@ -25,17 +25,23 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
 
     private static final long serialVersionUID = 1L;
     private static InterfaceServidor inface = null;
-    private static List<Processo> processos = new ArrayList<>();
-    public static List<Produto> produtosLeilao = new ArrayList<>();
+    private static List<Clientes> listaClientesAtivos = new ArrayList<>();
+    public static List<Produto> listaProdutosDesteCliente = new ArrayList<>();
+    private static List<Leilao> listaLeiloesAtivos = new ArrayList<>(); 
     private Integer incrIDProd = 0; //produto ID
-    private Integer incrIDProc = 0; //processo ID
+ //   private Integer incrIDProc = 0; //processo ID
     
 
-    public Controle(InterfaceCliente referenciaCliente) throws RemoteException {
-        
-        processos.add(new Processo(referenciaCliente, incrIDProc ));
-        incrIDProc++;
+    public Controle() throws RemoteException {
+     
     }
+
+    public void cadastrarRefCli(String name, InterfaceCliente referenciaCliente, Integer clienteID) {
+         listaClientesAtivos.add(new Clientes(referenciaCliente, clienteID, name ));
+      
+  
+    }
+
 
     public Controle(int port) throws RemoteException {
         super(port);
@@ -49,10 +55,10 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
     
 
 
-    static Remote getInstance(InterfaceCliente referenciaCliente) throws RemoteException {
+    static Remote getInstance() throws RemoteException {
 
         if (inface == null) {
-            inface = new Controle(referenciaCliente);
+            inface = new Controle();
         }
         return inface;
     }
@@ -60,12 +66,12 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
     @Override
     public boolean cadastrarLeilao(int idCliente, String nomeProduto, Integer precoIncial,
             String descricao, Integer tempo) throws RemoteException {
-        Processo p = procuraCliente(idCliente);
+        Clientes p = procuraCliente(idCliente);
         if (p != null) {
             incrIDProd++;
             Produto produto = new Produto(incrIDProd, nomeProduto,descricao, precoIncial, tempo);
             p.getListaProduto().add(produto);
-            produtosLeilao.add(produto);
+            listaProdutosDesteCliente.add(produto);
        
                Temporizador temporizador = new Temporizador(tempo, produto);
                Thread  thread= new Thread(temporizador);
@@ -94,23 +100,12 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
 
 
     @Override
-    public boolean darlance(int idProcesso, int idProduto, Integer valor) throws RemoteException {
-        Leilao leilao = procuraProdutoLeiloando(idProduto);
-        if (leilao != null) {
-            Integer valorAtual = Integer.parseInt(leilao.getProduto().getPrecoInicial());
-            if (valorAtual < valor) {
-               leilao.getLancadores().add(procuraCliente(idProcesso));
-               leilao.getProduto().setPrecoInicial(valor.toString());
-              
-               
-            }
-
-        }
-        return false;
+    public boolean darlance(int idCliente, int idProduto, Integer valor) throws RemoteException {
+       return true;
     }
 
-    private Processo procuraCliente(int idCliente) {
-        for (Processo p : processos) {
+    private Clientes procuraCliente(int idCliente) {
+        for (Clientes p : listaClientesAtivos) {
             if (idCliente == p.getId()) {
                 return p;
             }
@@ -119,7 +114,7 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
     }
 
     private List<Produto> procuraProdutosdeUmCliente(int idCliente) {
-        for (Processo p : processos) {
+        for (Clientes p : listaClientesAtivos) {
             if (idCliente == p.getId()) {
                 return p.getListaProduto();
             }
@@ -128,7 +123,7 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
     }
 
     private Produto procuraProdutos(int idProduto) {
-        for (Processo p : processos) {
+        for (Clientes p : listaClientesAtivos) {
             for (Produto prod : p.getListaProduto()) {
                 if (idProduto == prod.getId()) {
                     return prod;
@@ -138,34 +133,12 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
         return null;
     }
 
-    private Leilao procuraProdutoLeiloando(int idProduto) {
-        for (Leilao leilao : produtosLeilao) {
-            for (Processo processo : leilao.getLancadores()) {
-                for (Produto produto : processo.getListaProduto()) {
-                    if (idProduto == processo.getId()) {
-                        return leilao;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
+   
     private void inicailizaLeilao() {
 
     }
 
-      /**
-     * Mapeia o cliente e sua respectiva referência
-     * @param name
-     * @param cli
-     * @return (status da realização do mapeamento)
-     */
-
-    public boolean cadastrarRefCli(String name, InterfaceCliente cli) {
-        Server server = new Server();
-        return server.MapActiveClients(name, cli);
-    }
+    
 
       
     

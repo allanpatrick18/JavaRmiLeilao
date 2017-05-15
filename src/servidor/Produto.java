@@ -20,7 +20,7 @@ public class Produto implements Serializable{
     private String descricao;
     private Integer precoInicial;
     private Integer tempoFinal;
-    private List<Processo> processoInteressados = new ArrayList<>();
+    private List<Clientes> processoInteressados = new ArrayList<>();
     private Process ultimoLancador; //ultimo cara que deu o lance
     private Integer precoFinal;
 
@@ -32,11 +32,11 @@ public class Produto implements Serializable{
         this.tempoFinal = tempoFinal;
     }
 
-    public List<Processo> getProcessoInteressados() {
+    public List<Clientes> getProcessoInteressados() {
         return processoInteressados;
     }
 
-    public void setProcessoInteressados(List<Processo> processoInteressados) {
+    public void setProcessoInteressados(List<Clientes> processoInteressados) {
         this.processoInteressados = processoInteressados;
     }
 

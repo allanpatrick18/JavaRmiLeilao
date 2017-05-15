@@ -14,7 +14,9 @@ import java.util.Scanner;
 
 import java.lang.management.ManagementFactory;
 import java.rmi.AlreadyBoundException;
+import java.rmi.Remote;
 import java.util.Random;
+import javax.swing.JOptionPane;
 import servidor.Controle;
 
 public class Main {
@@ -22,19 +24,23 @@ public class Main {
    public static InterfaceServidor  controle = null;
    public static Integer id;
    
-    public static void criaIdenficacao(InterfaceServidor servidor) throws RemoteException, MalformedURLException, AlreadyBoundException {
+    public static void criaIdenficacao(InterfaceServidor servidor, InterfaceCliente impleCli, String nome) throws RemoteException, MalformedURLException, AlreadyBoundException {
         String name = ManagementFactory.getRuntimeMXBean().getName();
         String[] idString= name.split("@");
         id = Integer.parseInt(idString[0]);
-        servidor.instanciaUmCliente(id);
+        servidor.cadastrarRefCli(nome, impleCli, id);
 
     }
 
     public static void main(String[] args) throws MalformedURLException, RemoteException, NotBoundException, AlreadyBoundException {
 
+        
         Registry registro = LocateRegistry.getRegistry(4370);
         controle = (InterfaceServidor) registro.lookup("controle");
-        criaIdenficacao(controle);
+        
+        String nome = JOptionPane.showInputDialog("Para realizar seu primeiro acesso, cadastre seu nome:");
+        
+        criaIdenficacao(controle,new ImpleCli(), nome);
        
         
         

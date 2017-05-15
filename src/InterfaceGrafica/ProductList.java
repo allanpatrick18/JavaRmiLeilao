@@ -166,8 +166,8 @@ public class ProductList extends javax.swing.JFrame {
       DefaultTableModel yourModel = (DefaultTableModel) meusProdutos.getModel();
       
       for (Produto pro :p){
-          yourModel.addRow(new Object[]{pro.getName(),pro.getDescricao(),Integer.parseInt(pro.getPrecoInicial()), pro.getDescricao(),
-          Integer.parseInt(pro.getTempoFinal())});
+          yourModel.addRow(new Object[]{pro.getName(),pro.getDescricao(),pro.getPrecoInicial(), pro.getDescricao(),
+          pro.getTempoFinal()});
       }
       
       

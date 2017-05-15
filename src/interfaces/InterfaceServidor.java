@@ -15,16 +15,17 @@ import servidor.Produto;
  * @author allan
  */
 public interface InterfaceServidor extends Remote {
-    
- 
-  public boolean cadastrarLeilao(int idCliente, String nomeProduto, Integer precoIncial,
+
+    public boolean cadastrarLeilao(int idCliente, String nomeProduto, Integer precoIncial,
             String descricao, Integer tempo) throws RemoteException;
-  
- 
-  boolean darlance(int idCliente, int idProduto, Integer valor)throws RemoteException;
-  
-  boolean teste(int idCliente, String nomeProduto)throws RemoteException;
- 
-  List<Produto> listarProdutos(int idCliente) throws RemoteException;
-    
+
+    boolean darlance(int idCliente, int idProduto, Integer valor) throws RemoteException;
+
+    boolean teste(int idCliente, String nomeProduto) throws RemoteException;
+
+    List<Produto> listarProdutos(int idCliente) throws RemoteException;
+
+    public void cadastrarRefCli(String name, InterfaceCliente referenciaCliente, Integer clienteID)
+            throws RemoteException;
+
 }

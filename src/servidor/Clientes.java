@@ -13,16 +13,18 @@ import java.util.List;
  *
  * @author allan
  */
-public class Processo {
+public class Clientes {
     
     private int id;
     private String nome;
     private List<Produto> listaProduto  = new ArrayList<>();
     private InterfaceCliente referenciaCliente;
 
-    public Processo(InterfaceCliente referenciaCliente, Integer processoID) {
+    public Clientes(InterfaceCliente referenciaCliente, Integer processoID, String nome) {
         this.referenciaCliente =  referenciaCliente;
         this.id = processoID;
+        this.nome = nome; 
+        
     }
    
     public int getId() {

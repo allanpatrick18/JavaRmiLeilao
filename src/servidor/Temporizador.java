@@ -8,7 +8,7 @@ package servidor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static servidor.Controle.produtosLeilao;
+import static servidor.Controle.listaProdutosDesteCliente;
 
 /**
  *
@@ -30,7 +30,7 @@ public class Temporizador extends Thread{
             Thread.sleep(tempo*1000);
             //TODO something after
             
-            if(!produtosLeilao.isEmpty()){
+            if(!listaProdutosDesteCliente.isEmpty()){
                 if(produto.getUltimoLancador()!= null)
                 {
                    produto.getUltimoLancador();

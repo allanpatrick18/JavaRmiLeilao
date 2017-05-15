@@ -27,7 +27,7 @@ public class Server {
         Registry registro = LocateRegistry.createRegistry(4370);
        InterfaceCliente interfaceCliente = (InterfaceCliente) registro.lookup("cliente");
       
-        registro.bind("controle", Controle.getInstance(interfaceCliente));
+        registro.bind("controle", Controle.getInstance());
         
      
         System.out.println("Servidor do banco iniciado!");
