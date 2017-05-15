@@ -31,7 +31,7 @@ public class Server {
       try {
      
         Registry registry = LocateRegistry.createRegistry(4370);
-        registry.rebind("controle", new Controle());
+        registry.rebind("controle", Controle.getInstance());
         System.out.println("Servidor do banco iniciado!");
         } catch (RemoteException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);

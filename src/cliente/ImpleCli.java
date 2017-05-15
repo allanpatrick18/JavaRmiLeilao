@@ -5,6 +5,8 @@
  */
 package cliente;
 
+import InterfaceGrafica.ProductList;
+import static cliente.Main.productList;
 import java.rmi.RemoteException;
 import java.rmi.server.RMIClientSocketFactory;
 import java.rmi.server.RMIServerSocketFactory;
@@ -18,6 +20,9 @@ import interfaces.InterfaceCliente;
  */
 public class ImpleCli extends UnicastRemoteObject implements InterfaceCliente{
 
+    
+    
+    
     public ImpleCli() throws RemoteException {
         super(0);
     }
@@ -32,7 +37,7 @@ public class ImpleCli extends UnicastRemoteObject implements InterfaceCliente{
 
     @Override
     public void receberNotificacao(String msg) throws RemoteException {
-     
+       productList.notificaCliente(msg);
     }
     
     

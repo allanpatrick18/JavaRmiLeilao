@@ -2,7 +2,7 @@ package cliente;
 
 import InterfaceGrafica.AuctionRegister;
 import InterfaceGrafica.BidRegister;
-import InterfaceGrafica.InicialMenu;
+
 import InterfaceGrafica.ProductList;
 import interfaces.InterfaceServidor;
 import java.net.MalformedURLException;
@@ -25,6 +25,8 @@ public class Main {
    public static InterfaceServidor  controle = null;
    public static Integer id;
    public  static InterfaceCliente InterfaceCliente;
+   public static String nome;
+   public static ProductList productList;
    
     public static void criaIdenficacao(InterfaceServidor servidor, String nome) throws RemoteException, MalformedURLException, AlreadyBoundException {
         String name = ManagementFactory.getRuntimeMXBean().getName();
@@ -40,17 +42,17 @@ public class Main {
         Registry registro = LocateRegistry.getRegistry(4370);
         controle = (InterfaceServidor) registro.lookup("controle");
         
-        String nome = JOptionPane.showInputDialog("Para realizar seu primeiro acesso, cadastre seu nome:");
+        nome = JOptionPane.showInputDialog("Para realizar seu primeiro acesso, cadastre seu nome:");
         
         criaIdenficacao(controle, nome);
        
         
-        
+        productList = new ProductList();
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new ProductList().setVisible(true);
+                 productList.setVisible(true);
             }
         });
         

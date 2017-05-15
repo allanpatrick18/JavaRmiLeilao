@@ -8,7 +8,7 @@ package servidor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static servidor.Controle.listaProdutosDesteCliente;
+
 
 /**
  *
@@ -30,13 +30,10 @@ public class Temporizador extends Thread{
             Thread.sleep(tempo*1000);
             //TODO something after
             
-            if(!listaProdutosDesteCliente.isEmpty()){
+            if(!Controle.listaLeiloesAtivos.isEmpty()){
                 if(produto.getUltimoLancador()!= null)
                 {
-                   produto.getUltimoLancador();
                    
-                   
-                    //receberNotificacao da Interface Cliente
                     
                     
                     
@@ -46,7 +43,7 @@ public class Temporizador extends Thread{
                 }   
             
             }else{
-                System.out.println("Erro : Lista de produtos vazio!");
+                System.out.println("Erro : Lista de leiloes ativos vazia!");
             
             }
             

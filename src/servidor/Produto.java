@@ -21,15 +21,33 @@ public class Produto implements Serializable{
     private Integer precoInicial;
     private Integer tempoFinal;
     private List<Clientes> processoInteressados = new ArrayList<>();
-    private Process ultimoLancador; //ultimo cara que deu o lance
+    private Clientes ultimoLancador; //ultimo cara que deu o lance
     private Integer precoFinal;
+    private Clientes leiloador;
 
-    public Produto(Integer id, String name, String descricao, Integer precoInicial, Integer tempoFinal) {
+    public Produto(String name, String descricao, Integer precoFinal) {
+        this.name = name;
+        this.descricao = descricao;
+      //  this.ultimoLancador = ultimoLancador;
+        this.precoFinal = precoFinal;
+      //  this.leiloador = leiloador;
+    }
+
+    public Clientes getLeiloador() {
+        return leiloador;
+    }
+
+    public void setLeiloador(Clientes leiloador) {
+        this.leiloador = leiloador;
+    }
+
+    public Produto(Integer id, String name, String descricao, Integer precoInicial, Integer tempoFinal, Clientes leiloador) {
         this.id = id;
         this.name = name;
         this.descricao = descricao;
         this.precoInicial = precoInicial;
         this.tempoFinal = tempoFinal;
+        this.leiloador = leiloador;
     }
 
     public List<Clientes> getProcessoInteressados() {
@@ -40,13 +58,23 @@ public class Produto implements Serializable{
         this.processoInteressados = processoInteressados;
     }
 
-    public Process getUltimoLancador() {
+    public Clientes getUltimoLancador() {
         return ultimoLancador;
     }
 
-    public void setUltimoLancador(Process ultimoLancador) {
+    public void setUltimoLancador(Clientes ultimoLancador) {
         this.ultimoLancador = ultimoLancador;
     }
+
+    public Integer getPrecoFinal() {
+        return precoFinal;
+    }
+
+    public void setPrecoFinal(Integer precoFinal) {
+        this.precoFinal = precoFinal;
+    }
+
+  
 
 
     public Integer getId() {

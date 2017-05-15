@@ -21,10 +21,10 @@ public class AuctionRegister extends javax.swing.JFrame {
     /**
      * Creates new form CadastroProduto
      */
-    InicialMenu inicialMenu = null;
+    ProductList prodList = null;
 
-    public AuctionRegister(InicialMenu inicialMenu) {
-        this.inicialMenu = inicialMenu;
+    public AuctionRegister(ProductList prodList) {
+        this.prodList = prodList;
         initComponents();
     }
 
@@ -158,20 +158,25 @@ public class AuctionRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_precoInialActionPerformed
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
+   
         this.setVisible(false);
-        inicialMenu.setVisible(true);
+         prodList.setVisible(true);
+
     }//GEN-LAST:event_voltarActionPerformed
 
     private void registarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registarActionPerformed
         if (nomeProduto != null && nomeProduto != null) {
-           // try {
-          //      boolean v = controle.cadastrarLeilao(id, nomeProduto.getText(), precoInial.getText(), despricaoProduto.getText(), tempo.getText());
-             //  if(v){ JOptionPane.showMessageDialog(null,"Produto Cadastrado com sucesso!");}
-           // } catch (RemoteException ex) {
-             //   Logger.getLogger(AuctionRegister.class.getName()).log(Level.SEVERE, null, ex);
-          //  }
+            try {
+                boolean v = controle.cadastrarLeilao(id, nomeProduto.getText(), Integer.parseInt(precoInial.getText()), despricaoProduto.getText(), Integer.parseInt(tempo.getText()));
+               if(v){ JOptionPane.showMessageDialog(null,"Produto Cadastrado com sucesso!");}
+            } catch (RemoteException ex) {
+                Logger.getLogger(AuctionRegister.class.getName()).log(Level.SEVERE, null, ex);
+           }
 
         }
+      
+      this.setVisible(false);
+     prodList.setVisible(true);
 
 
     }//GEN-LAST:event_registarActionPerformed

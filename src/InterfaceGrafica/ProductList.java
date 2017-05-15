@@ -5,12 +5,14 @@
  */
 package InterfaceGrafica;
 
+import cliente.Main;
 import static cliente.Main.controle;
 import static cliente.Main.id;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import servidor.Produto;
 
@@ -23,9 +25,14 @@ public class ProductList extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-  //  InicialMenu inicialMenu = null;
+    //  InicialMenu inicialMenu = null;
+    AuctionRegister auctionRegister = null;
+    BidRegister bidRegister = null;
+
     public ProductList() {
-     //   this.inicialMenu = inicialMenu;
+        //   this.inicialMenu = inicialMenu;
+        this.auctionRegister = new AuctionRegister(this);
+        this.bidRegister = new BidRegister(this);
         initComponents();
     }
 
@@ -41,11 +48,11 @@ public class ProductList extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         meusProdutos = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        label1 = new java.awt.Label();
+        notificacao = new java.awt.Label();
         label2 = new java.awt.Label();
         jButton2 = new javax.swing.JButton();
         updateList = new javax.swing.JButton();
-        voltar = new javax.swing.JButton();
+        registraLance = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -55,11 +62,11 @@ public class ProductList extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Products´ name", "Description", "Current Price", " Bid made by", " Auctioneer", "Action"
+                "Nome Produto", "Descrição", "Preço Atual", "Lance por", "Leiloeiro"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -68,9 +75,9 @@ public class ProductList extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(meusProdutos);
 
-        label1.setText("label1");
+        notificacao.setText("Nenhuma mensagem.");
 
-        label2.setText("Messages from Server:");
+        label2.setText("Notificações:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -78,7 +85,7 @@ public class ProductList extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(notificacao, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -87,27 +94,27 @@ public class ProductList extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(notificacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jButton2.setText("Register Auction");
+        jButton2.setText("Registra Leilão");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        updateList.setText("Update List");
+        updateList.setText("Atualiza Lista");
         updateList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateListActionPerformed(evt);
             }
         });
 
-        voltar.setText("Voltar");
-        voltar.addActionListener(new java.awt.event.ActionListener() {
+        registraLance.setText("Registra Lance");
+        registraLance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                voltarActionPerformed(evt);
+                registraLanceActionPerformed(evt);
             }
         });
 
@@ -119,20 +126,21 @@ public class ProductList extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(updateList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(voltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(registraLance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(voltar)
+                .addComponent(registraLance)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -148,34 +156,63 @@ public class ProductList extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        auctionRegister.setVisible(true);
+        this.setVisible(false);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void updateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateListActionPerformed
-      DefaultTableModel yourModel = (DefaultTableModel) meusProdutos.getModel();
-      yourModel.addRow(new Object[]{"Products", "Description",2, ""});
+        //  DefaultTableModel yourModel = (DefaultTableModel) meusProdutos.getModel();
+        try {
+            atualiza();
+        } catch (RemoteException ex) {
+            Logger.getLogger(ProductList.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_updateListActionPerformed
 
-    private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
-       this.setVisible(false);
-   //   inicialMenu.setVisible(true);
-    }//GEN-LAST:event_voltarActionPerformed
-    
-    public void atualiza() throws RemoteException {                                       
-      List<Produto> p =controle.listarProdutos(id);
-      DefaultTableModel yourModel = (DefaultTableModel) meusProdutos.getModel();
-      
-      for (Produto pro :p){
-          yourModel.addRow(new Object[]{pro.getName(),pro.getDescricao(),pro.getPrecoInicial(), pro.getDescricao(),
-          pro.getTempoFinal()});
-      }
-      
-      
-     
-     
-    }                           
-    
-    
+    private void registraLanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registraLanceActionPerformed
+
+        //Para saber a linha selecionada:
+
+        Integer linha = meusProdutos.getSelectedRow(); //retorna um inteiro
+        //Para pegar um valor da linha:
+
+        Produto produto;
+        if (linha != null) {
+            
+          //  produto = new Produto(meusProdutos.getValueAt(linha,0),meusProdutos.getValueAt(linha,1), meusProdutos.getValueAt(linha,2));
+             meusProdutos.getValueAt(linha,0); 
+            
+            bidRegister.setVisible(true);
+            this.setVisible(false);
+        } else {
+
+            JOptionPane.showConfirmDialog(rootPane, "Selecione um produto para dar o lance!");
+        }
+    }//GEN-LAST:event_registraLanceActionPerformed
+
+    public void atualiza() throws RemoteException {
+        List<Produto> p = controle.listarProdutos();
+
+        DefaultTableModel yourModel = (DefaultTableModel) meusProdutos.getModel();
+
+        yourModel.getDataVector().removeAllElements();
+        for (Produto pro : p) {
+
+            yourModel.addRow(new Object[]{pro.getName(), pro.getDescricao(), pro.getPrecoInicial(), "Nenhum Lance",
+                Main.nome
+            });
+
+        }
+
+        p.clear();
+
+    }
+
+    public void notificaCliente(String notificacao) {
+        this.notificacao.setText(notificacao);
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -218,10 +255,10 @@ public class ProductList extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private java.awt.Label label1;
     private java.awt.Label label2;
     private javax.swing.JTable meusProdutos;
+    private java.awt.Label notificacao;
+    private javax.swing.JButton registraLance;
     private javax.swing.JButton updateList;
-    private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
 }
