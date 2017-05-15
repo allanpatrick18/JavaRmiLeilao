@@ -5,6 +5,7 @@
  */
 package servidor;
 
+import interfaces.InterfaceCliente;
 import interfaces.InterfaceServidor;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -26,11 +27,14 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
     private static InterfaceServidor inface = null;
     private static List<Processo> processos = new ArrayList<>();
     public static List<Produto> produtosLeilao = new ArrayList<>();
-    private Integer incrIDProd;
-    
+    private Integer incrIDProd = 0; //produto ID
+    private Integer incrIDProc = 0; //processo ID
     
 
-    public Controle() throws RemoteException {
+    public Controle(InterfaceCliente referenciaCliente) throws RemoteException {
+        
+        processos.add(new Processo(referenciaCliente, incrIDProc ));
+        incrIDProc++;
     }
 
     public Controle(int port) throws RemoteException {
@@ -41,14 +45,14 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
         super(port, csf, ssf);
     }
 
-    public void instanciaUmCliente(int id) throws RemoteException {
-        processos.add(new Processo(id));
-    }
+    
+    
 
-    static Remote getInstance() throws RemoteException {
+
+    static Remote getInstance(InterfaceCliente referenciaCliente) throws RemoteException {
 
         if (inface == null) {
-            inface = new Controle();
+            inface = new Controle(referenciaCliente);
         }
         return inface;
     }
@@ -147,6 +151,22 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
         return null;
     }
 
-    
+    private void inicailizaLeilao() {
 
+    }
+
+      /**
+     * Mapeia o cliente e sua respectiva referência
+     * @param name
+     * @param cli
+     * @return (status da realização do mapeamento)
+     */
+
+    public boolean cadastrarRefCli(String name, InterfaceCliente cli) {
+        Server server = new Server();
+        return server.MapActiveClients(name, cli);
+    }
+
+      
+    
 }

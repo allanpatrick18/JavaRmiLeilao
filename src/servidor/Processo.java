@@ -5,6 +5,7 @@
  */
 package servidor;
 
+import interfaces.InterfaceCliente;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +18,11 @@ public class Processo {
     private int id;
     private String nome;
     private List<Produto> listaProduto  = new ArrayList<>();
+    private InterfaceCliente referenciaCliente;
 
-    public Processo(int id) {
-        this.id = id;
+    public Processo(InterfaceCliente referenciaCliente, Integer processoID) {
+        this.referenciaCliente =  referenciaCliente;
+        this.id = processoID;
     }
    
     public int getId() {
@@ -32,6 +35,14 @@ public class Processo {
 
     public String getNome() {
         return nome;
+    }
+
+    public InterfaceCliente getReferenciaCliente() {
+        return referenciaCliente;
+    }
+
+    public void setReferenciaCliente(InterfaceCliente referenciaCliente) {
+        this.referenciaCliente = referenciaCliente;
     }
 
     public void setNome(String nome) {

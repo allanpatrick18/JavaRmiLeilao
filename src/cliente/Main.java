@@ -36,6 +36,9 @@ public class Main {
         controle = (InterfaceServidor) registro.lookup("controle");
         criaIdenficacao(controle);
        
+        
+        
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {

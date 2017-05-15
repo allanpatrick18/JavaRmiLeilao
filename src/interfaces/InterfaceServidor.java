@@ -16,8 +16,7 @@ import servidor.Produto;
  */
 public interface InterfaceServidor extends Remote {
     
-  public void instanciaUmCliente(int id) throws RemoteException;
-  
+ 
   public boolean cadastrarLeilao(int idCliente, String nomeProduto, Integer precoIncial,
             String descricao, Integer tempo) throws RemoteException;
   

@@ -33,8 +33,10 @@ public class Temporizador extends Thread{
             if(!produtosLeilao.isEmpty()){
                 if(produto.getUltimoLancador()!= null)
                 {
-                    
-                    //Aqui chamar funcao do Controle
+                   produto.getUltimoLancador();
+                   
+                   
+                    //receberNotificacao da Interface Cliente
                     
                     
                     
