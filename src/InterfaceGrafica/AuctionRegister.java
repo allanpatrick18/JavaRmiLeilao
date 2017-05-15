@@ -164,12 +164,12 @@ public class AuctionRegister extends javax.swing.JFrame {
 
     private void registarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registarActionPerformed
         if (nomeProduto != null && nomeProduto != null) {
-            try {
-                boolean v = controle.cadastrarLeilao(id, nomeProduto.getText(), precoInial.getText(), despricaoProduto.getText(), tempo.getText());
-               if(v){ JOptionPane.showMessageDialog(null,"Produto Cadastrado com sucesso!");}
-            } catch (RemoteException ex) {
-                Logger.getLogger(AuctionRegister.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           // try {
+          //      boolean v = controle.cadastrarLeilao(id, nomeProduto.getText(), precoInial.getText(), despricaoProduto.getText(), tempo.getText());
+             //  if(v){ JOptionPane.showMessageDialog(null,"Produto Cadastrado com sucesso!");}
+           // } catch (RemoteException ex) {
+             //   Logger.getLogger(AuctionRegister.class.getName()).log(Level.SEVERE, null, ex);
+          //  }
 
         }
 

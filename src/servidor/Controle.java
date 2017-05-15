@@ -27,7 +27,7 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
     private static InterfaceServidor inface = null;
     private static List<Clientes> listaClientesAtivos = new ArrayList<>();
     public static List<Produto> listaProdutosDesteCliente = new ArrayList<>();
-    private static List<Leilao> listaLeiloesAtivos = new ArrayList<>(); 
+ //   private static List<Leilao> listaLeiloesAtivos = new ArrayList<>(); 
     private Integer incrIDProd = 0; //produto ID
  //   private Integer incrIDProc = 0; //processo ID
     
@@ -55,7 +55,7 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
     
 
 
-    static Remote getInstance() throws RemoteException {
+    public static Remote getInstance() throws RemoteException {
 
         if (inface == null) {
             inface = new Controle();

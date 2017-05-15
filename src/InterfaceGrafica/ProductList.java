@@ -23,9 +23,9 @@ public class ProductList extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    InicialMenu inicialMenu = null;
-    public ProductList(InicialMenu inicialMenu) {
-        this.inicialMenu = inicialMenu;
+  //  InicialMenu inicialMenu = null;
+    public ProductList() {
+     //   this.inicialMenu = inicialMenu;
         initComponents();
     }
 
@@ -158,7 +158,7 @@ public class ProductList extends javax.swing.JFrame {
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
        this.setVisible(false);
-      inicialMenu.setVisible(true);
+   //   inicialMenu.setVisible(true);
     }//GEN-LAST:event_voltarActionPerformed
     
     public void atualiza() throws RemoteException {                                       

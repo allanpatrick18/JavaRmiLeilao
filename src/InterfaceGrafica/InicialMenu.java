@@ -25,7 +25,7 @@ public class InicialMenu extends javax.swing.JFrame {
     BidRegister bidRegister = null;
     AuctionRegister auctionRegister = null;
     public InicialMenu() {
-        p = new ProductList(this);
+   //     p = new ProductList(this);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 p.setVisible(false);
@@ -102,7 +102,7 @@ public class InicialMenu extends javax.swing.JFrame {
                         .addComponent(leiloar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(darLance)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

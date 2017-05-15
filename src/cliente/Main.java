@@ -18,17 +18,19 @@ import java.rmi.Remote;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import servidor.Controle;
+import interfaces.InterfaceCliente;
 
 public class Main {
     
    public static InterfaceServidor  controle = null;
    public static Integer id;
+   public  static InterfaceCliente InterfaceCliente;
    
-    public static void criaIdenficacao(InterfaceServidor servidor, InterfaceCliente impleCli, String nome) throws RemoteException, MalformedURLException, AlreadyBoundException {
+    public static void criaIdenficacao(InterfaceServidor servidor, String nome) throws RemoteException, MalformedURLException, AlreadyBoundException {
         String name = ManagementFactory.getRuntimeMXBean().getName();
         String[] idString= name.split("@");
         id = Integer.parseInt(idString[0]);
-        servidor.cadastrarRefCli(nome, impleCli, id);
+        servidor.cadastrarRefCli(nome,InterfaceCliente , id);
 
     }
 
@@ -40,7 +42,7 @@ public class Main {
         
         String nome = JOptionPane.showInputDialog("Para realizar seu primeiro acesso, cadastre seu nome:");
         
-        criaIdenficacao(controle,new ImpleCli(), nome);
+        criaIdenficacao(controle, nome);
        
         
         
@@ -48,7 +50,7 @@ public class Main {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new InicialMenu().setVisible(true);
+                new ProductList().setVisible(true);
             }
         });
         

@@ -6,12 +6,15 @@
 package servidor;
 
 import interfaces.InterfaceCliente;
+import interfaces.InterfaceServidor;
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,14 +26,17 @@ public class Server {
     }
 
     public static void main(String[] args) throws RemoteException, MalformedURLException, AlreadyBoundException, NotBoundException {
-       
-        Registry registro = LocateRegistry.createRegistry(4370);
-       InterfaceCliente interfaceCliente = (InterfaceCliente) registro.lookup("cliente");
       
-        registro.bind("controle", Controle.getInstance());
-        
+      
+      try {
      
+        Registry registry = LocateRegistry.createRegistry(4370);
+        registry.rebind("controle", new Controle());
         System.out.println("Servidor do banco iniciado!");
+        } catch (RemoteException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
 
     }
     

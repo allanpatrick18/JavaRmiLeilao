@@ -10,6 +10,8 @@ import java.rmi.server.RMIClientSocketFactory;
 import java.rmi.server.RMIServerSocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 
+import interfaces.InterfaceCliente;
+
 /**
  *
  * @author Jessica
