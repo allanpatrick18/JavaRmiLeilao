@@ -21,27 +21,50 @@ import java.rmi.Remote;
  */
 public class ClienteImpl extends UnicastRemoteObject implements InterfaceCliente{
 
-    
-    
-    
+    /**
+     *
+     * @throws RemoteException
+     */
     public ClienteImpl() throws RemoteException {
         super(0);
     }
 
+    /**
+     *
+     * @param port
+     * @throws RemoteException
+     */
     public ClienteImpl(int port) throws RemoteException {
         super(port);
     }
 
+    /**
+     *
+     * @param port
+     * @param csf
+     * @param ssf
+     * @throws RemoteException
+     */
     public ClienteImpl(int port, RMIClientSocketFactory csf, RMIServerSocketFactory ssf) throws RemoteException {
         super(port, csf, ssf);
     }
 
+    /**
+     *
+     * @param msg
+     * @throws RemoteException
+     */
     @Override
     public void receberNotificacao(String msg) throws RemoteException {
        productList.notificaCliente(msg);
        productList.atualiza();
     }
     
+    /**
+     *
+     * @return
+     * @throws RemoteException
+     */
     public Remote refInterface() throws RemoteException {
       return new ClienteImpl();
     }

@@ -27,29 +27,64 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
     private static InterfaceServidor inface = null;
     private static List<Integer> leiloes = new ArrayList<>();
     private static List<Clientes> listaClientesAtivos = new ArrayList<>();
+
+    /**
+     *
+     */
     public static List<Produto> listaLeiloesAtivos = new ArrayList<>(); //mesma coisa que produtos
+
+    /**
+     *
+     */
     public static List<Produto> listaLeiloesInativos = new ArrayList<>();
     //   private static List<Leilao> listaLeiloesAtivos = new ArrayList<>(); 
     private Integer incrIDProd = 0; //produto ID
     //   private Integer incrIDProc = 0; //processo ID
 
+    /**
+     *
+     * @throws RemoteException
+     */
     public Controle() throws RemoteException {
 
     }
 
+    /**
+     *
+     * @param name
+     * @param referenciaCliente
+     * @param clienteID
+     */
     public void cadastrarRefCli(String name, InterfaceCliente referenciaCliente, Integer clienteID) {
         listaClientesAtivos.add(new Clientes(referenciaCliente, clienteID, name));
 
     }
 
+    /**
+     *
+     * @param port
+     * @throws RemoteException
+     */
     public Controle(int port) throws RemoteException {
         super(port);
     }
 
+    /**
+     *
+     * @param port
+     * @param csf
+     * @param ssf
+     * @throws RemoteException
+     */
     public Controle(int port, RMIClientSocketFactory csf, RMIServerSocketFactory ssf) throws RemoteException {
         super(port, csf, ssf);
     }
 
+    /**
+     *
+     * @return
+     * @throws RemoteException
+     */
     public static Remote getInstance() throws RemoteException {
 
         if (inface == null) {
@@ -58,6 +93,16 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
         return inface;
     }
 
+    /**
+     *
+     * @param idCliente
+     * @param nomeProduto
+     * @param precoIncial
+     * @param descricao
+     * @param tempo
+     * @return
+     * @throws RemoteException
+     */
     @Override
     public boolean cadastrarLeilao(int idCliente, String nomeProduto, Integer precoIncial,
             String descricao, Integer tempo) throws RemoteException {
@@ -77,11 +122,23 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
         return true;
     }
 
+    /**
+     *
+     * @return
+     * @throws RemoteException
+     */
     @Override
     public List<Produto> listarProdutos() throws RemoteException {
         return listaLeiloesAtivos;
     }
 
+    /**
+     *
+     * @param idCliente
+     * @param nomeProduto
+     * @return
+     * @throws RemoteException
+     */
     @Override
     public boolean teste(int idCliente, String nomeProduto) throws RemoteException {
         System.out.println(idCliente);
@@ -89,6 +146,14 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
         return true;
     }
 
+    /**
+     *
+     * @param idCliente
+     * @param idProduto
+     * @param valor
+     * @return
+     * @throws RemoteException
+     */
     @Override
     public boolean darlance(int idCliente, int idProduto, Integer valor) throws RemoteException {
 
@@ -187,6 +252,11 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
         return null;
     }
 
+    /**
+     *
+     * @param produto
+     * @throws RemoteException
+     */
     synchronized public void finalizaLeilao(Produto produto) throws RemoteException {
         if (produto.getUltimoLancador() == null) {
             produto.getLeiloador().getReferenciaCliente().receberNotificacao("O leilao do produto " + produto.getName() + "foi encerrado e ninguém se interessou pelo produto.");

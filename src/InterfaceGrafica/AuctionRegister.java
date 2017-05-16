@@ -24,6 +24,10 @@ public class AuctionRegister extends javax.swing.JFrame {
      */
     ProductList prodList = null;
 
+    /**
+     *
+     * @param prodList
+     */
     public AuctionRegister(ProductList prodList) {
         this.prodList = prodList;
         initComponents();

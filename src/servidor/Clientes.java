@@ -21,9 +21,18 @@ public class Clientes implements Serializable{
 //    private List<Produto> listaProduto  = new ArrayList<>();
     private InterfaceCliente referenciaCliente;
 
+    /**
+     *
+     */
     public Clientes() {
     }
 
+    /**
+     *
+     * @param referenciaCliente
+     * @param processoID
+     * @param nome
+     */
     public Clientes(InterfaceCliente referenciaCliente, Integer processoID, String nome) {
         this.referenciaCliente =  referenciaCliente;
         this.id = processoID;
@@ -31,26 +40,50 @@ public class Clientes implements Serializable{
         
     }
    
+    /**
+     *
+     * @return
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     *
+     * @return
+     */
     public InterfaceCliente getReferenciaCliente() {
         return referenciaCliente;
     }
 
+    /**
+     *
+     * @param referenciaCliente
+     */
     public void setReferenciaCliente(InterfaceCliente referenciaCliente) {
         this.referenciaCliente = referenciaCliente;
     }
 
+    /**
+     *
+     * @param nome
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }

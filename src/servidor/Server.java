@@ -18,15 +18,29 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Classe Server onde contém as inicializações do servidor e a inserção de sua 
+ * referência no serviço de nomes
  * @author allan
  */
 public class Server {
 
+    /**
+     * Construtor vazio da classe Server
+     */
     public Server() {
     }
 
-    public static void main(String[] args) throws RemoteException, MalformedURLException, AlreadyBoundException, NotBoundException {
+    /**
+     * Método principal que inicializa o servidor e colocar sua referência no
+     * serviço de nomes
+     * @param args
+     * @throws RemoteException
+     * @throws MalformedURLException
+     * @throws AlreadyBoundException
+     * @throws NotBoundException
+     */
+    public static void main(String[] args) throws RemoteException, 
+            MalformedURLException, AlreadyBoundException, NotBoundException {
       
       
       try {
@@ -34,7 +48,7 @@ public class Server {
         Registry registry = LocateRegistry.createRegistry(4370);
         //associa a interface ao seu nome
         registry.rebind("controle", Controle.getInstance());
-        
+        //Inicializa o servidor
         System.out.println("Servidor do banco iniciado!");
         } catch (RemoteException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);

@@ -26,6 +26,10 @@ public class BidRegister extends javax.swing.JFrame {
     ProductList prodList = null;
     Produto pro;
 
+    /**
+     *
+     * @param prodList
+     */
     public BidRegister(ProductList prodList) {
         this.prodList = prodList;
         initComponents();
@@ -179,6 +183,11 @@ public class BidRegister extends javax.swing.JFrame {
        
     }//GEN-LAST:event_voltarActionPerformed
 
+    /**
+     *
+     * @param produto
+     * @throws RemoteException
+     */
     public void setDados(Produto produto) throws RemoteException {
 
         nomeProduto.setText(produto.getName());

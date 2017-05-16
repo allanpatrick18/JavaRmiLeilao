@@ -18,6 +18,11 @@ import servidor.Produto;
  */
 public interface InterfaceCliente extends Remote {
     
+    /**
+     *
+     * @param msg
+     * @throws RemoteException
+     */
     void receberNotificacao(String msg) throws RemoteException;
     
 }

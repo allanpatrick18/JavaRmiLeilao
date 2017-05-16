@@ -23,15 +23,45 @@ import java.util.ArrayList;
 import java.util.List;
 import servidor.Produto;
 
+/**
+ *
+ * @author a1562711
+ */
 public class Main {
     
-   public static InterfaceServidor  controle = null;
-   public static Integer id;
-   public static String nome;
-   public static ProductList productList;
-   public static List<Produto> list = new ArrayList<>();
+    /**
+     *
+     */
+    public static InterfaceServidor  controle = null;
+
+    /**
+     *
+     */
+    public static Integer id;
+
+    /**
+     *
+     */
+    public static String nome;
+
+    /**
+     *
+     */
+    public static ProductList productList;
+
+    /**
+     *
+     */
+    public static List<Produto> list = new ArrayList<>();
    
- 
+    /**
+     *
+     * @param servidor
+     * @param nome
+     * @throws RemoteException
+     * @throws MalformedURLException
+     * @throws AlreadyBoundException
+     */
     public static void criaIdenficacao(InterfaceServidor servidor, String nome) throws RemoteException, MalformedURLException, AlreadyBoundException {
         String name = ManagementFactory.getRuntimeMXBean().getName();
         //System.out.println("ID" + name);
@@ -43,6 +73,14 @@ public class Main {
 
     }
 
+    /**
+     *
+     * @param args
+     * @throws MalformedURLException
+     * @throws RemoteException
+     * @throws NotBoundException
+     * @throws AlreadyBoundException
+     */
     public static void main(String[] args) throws MalformedURLException, RemoteException, NotBoundException, AlreadyBoundException {
 
         

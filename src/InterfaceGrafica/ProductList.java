@@ -33,6 +33,9 @@ public class ProductList extends javax.swing.JFrame {
     AuctionRegister auctionRegister = null;
     BidRegister bidRegister = null;
 
+    /**
+     *
+     */
     public ProductList() {
         //   this.inicialMenu = inicialMenu;
         
@@ -274,6 +277,10 @@ public class ProductList extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_registraLanceActionPerformed
 
+    /**
+     *
+     * @throws RemoteException
+     */
     public void atualiza() throws RemoteException {
 //        List<Produto> p = controle.listarProdutos();
         list = controle.listarProdutos();
@@ -299,6 +306,10 @@ public class ProductList extends javax.swing.JFrame {
 
     }
 
+    /**
+     *
+     * @param notificacao
+     */
     public void notificaCliente(String notificacao) {
         
         this.notificacao.setText(notificacao);
