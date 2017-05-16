@@ -55,11 +55,11 @@ public class BidRegister extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jLabel1.setText("Description:");
+        jLabel1.setText("Descrição:");
 
-        jLabel3.setText("Current price:");
+        jLabel3.setText("Preço atual:");
 
-        jLabel5.setText("What´s your bid?");
+        jLabel5.setText("Qual o seu lance?");
 
         valor.setText("0");
         valor.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +75,7 @@ public class BidRegister extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Product:");
+        jLabel6.setText("Produto:");
         jLabel6.setToolTipText("");
 
         preco.setText("0");

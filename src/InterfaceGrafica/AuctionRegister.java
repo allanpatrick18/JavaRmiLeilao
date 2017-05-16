@@ -7,6 +7,7 @@ package InterfaceGrafica;
 
 import static cliente.Main.controle;
 import static cliente.Main.id;
+import static cliente.Main.productList;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,7 +53,7 @@ public class AuctionRegister extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jLabel1.setText("Name of product:");
+        jLabel1.setText("Nome do produto:");
 
         nomeProduto.setToolTipText("");
         nomeProduto.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.black, java.awt.Color.gray));
@@ -67,18 +68,18 @@ public class AuctionRegister extends javax.swing.JFrame {
         despricaoProduto.setRows(5);
         jScrollPane1.setViewportView(despricaoProduto);
 
-        jLabel2.setText("Description:");
+        jLabel2.setText("Descrição:");
 
-        registar.setText("Register");
+        registar.setText("Registra");
         registar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registarActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Initial Price:");
+        jLabel3.setText("Preço Inicial:");
 
-        precoInicial.setText("00,0");
+        precoInicial.setText("0");
         precoInicial.setToolTipText("");
         precoInicial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,7 +87,7 @@ public class AuctionRegister extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Time");
+        jLabel4.setText("Tempo de execução do leilão(min)");
 
         tempo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,7 +116,7 @@ public class AuctionRegister extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel3)
                         .addComponent(jLabel4)
-                        .addComponent(tempo, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                        .addComponent(tempo)
                         .addComponent(jLabel2)
                         .addComponent(jLabel1)
                         .addComponent(nomeProduto)
@@ -165,21 +166,25 @@ public class AuctionRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_voltarActionPerformed
 
     private void registarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registarActionPerformed
-        if (nomeProduto != null && nomeProduto != null) {
-            try {
-                boolean v = controle.cadastrarLeilao(id, nomeProduto.getText(), 
-                        Integer.parseInt(precoInicial.getText()), despricaoProduto.getText(),
-                        Integer.parseInt(tempo.getText()));
-               if(v){ JOptionPane.showMessageDialog(null,"Produto Cadastrado com sucesso!");}
-            } catch (RemoteException ex) {
-                Logger.getLogger(AuctionRegister.class.getName()).log(Level.SEVERE, null, ex);
-           }
-
+        try {
+            if (nomeProduto != null && nomeProduto != null) {
+                try {
+                    boolean v = controle.cadastrarLeilao(id, nomeProduto.getText(),
+                            Integer.parseInt(precoInicial.getText()), despricaoProduto.getText(),
+                            Integer.parseInt(tempo.getText()));
+                    if(v){ JOptionPane.showMessageDialog(null,"Produto Cadastrado com sucesso!");}
+                } catch (RemoteException ex) {
+                    Logger.getLogger(AuctionRegister.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+            
+            this.setVisible(false);
+            prodList.setVisible(true);
+            productList.atualiza();
+        } catch (RemoteException ex) {
+            Logger.getLogger(AuctionRegister.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
-      this.setVisible(false);
-     prodList.setVisible(true);
-
 
     }//GEN-LAST:event_registarActionPerformed
 

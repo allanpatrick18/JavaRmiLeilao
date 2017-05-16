@@ -5,9 +5,9 @@
  */
 package servidor;
 
+import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 
 /**
@@ -16,33 +16,32 @@ import java.util.logging.Logger;
  */
 public class Temporizador extends Thread{
     
-    private int tempo =1;
+    private int tempo ;
     private Produto produto;
+    private Controle controle;
     
     
-    
-    public Temporizador(int tempo, Produto produto) {
+    public Temporizador(int tempo, Produto produto, Controle controle) {
        this.tempo=tempo; 
        this.produto= produto;
+       this.controle = controle;
     }
     public void run() {
         try {
-            Thread.sleep(tempo*1000);
+            System.out.println("Time: "+ tempo); //sout
+            
+            Thread.sleep(tempo*60000);
+            
+            System.out.println("Teminou o temporizador!");
             //TODO something after
-            
-            if(!Controle.listaLeiloesAtivos.isEmpty()){
-                if(produto.getUltimoLancador()!= null)
-                {
-                  
-                }else{
-                    System.out.println("Erro : Nenhum apostador no produto!");
-                
-                }   
-            
-            }else{
-                System.out.println("Erro : Lista de leiloes ativos vazia!");
-            
+            try {
+                controle.finalizaLeilao(produto);
+            } catch (RemoteException ex) {
+                Logger.getLogger(Temporizador.class.getName()).log(Level.SEVERE, null, ex);
             }
+                    
+                    
+         
             
         } catch (InterruptedException ex) {
             Logger.getLogger(Temporizador.class.getName()).log(Level.SEVERE, null, ex);

@@ -35,9 +35,12 @@ public class ProductList extends javax.swing.JFrame {
 
     public ProductList() {
         //   this.inicialMenu = inicialMenu;
+        
         this.auctionRegister = new AuctionRegister(this);
         this.bidRegister = new BidRegister(this);
         initComponents();
+        
+        nomeCli.setText(Main.nome);
     }
 
     
@@ -58,6 +61,8 @@ public class ProductList extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         updateList = new javax.swing.JButton();
         registraLance = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        nomeCli = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -123,6 +128,10 @@ public class ProductList extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Nome do processo dessa janela:");
+
+        nomeCli.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,16 +144,26 @@ public class ProductList extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nomeCli)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(nomeCli))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(registraLance)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +205,7 @@ public class ProductList extends javax.swing.JFrame {
          bidRegister.setVisible(true);
          this.setVisible(false);
       }else{
-          JOptionPane.showConfirmDialog(rootPane, "Selecione um produto para dar o lance");
+          JOptionPane.showMessageDialog(rootPane, "Selecione um produto para dar o lance");
       
       }
             
@@ -260,14 +279,20 @@ public class ProductList extends javax.swing.JFrame {
         list = controle.listarProdutos();
 
         DefaultTableModel yourModel = (DefaultTableModel) meusProdutos.getModel();
-
+        
         yourModel.getDataVector().removeAllElements();
         for (Produto pro : list) {
-
-            yourModel.addRow(new Object[]{pro.getName(), pro.getDescricao(), pro.getPrecoFinal(), "Nenhum Lance",
-                Main.nome
-            });
-
+            if( pro.getUltimoLancador() == null  ){
+          
+            yourModel.addRow(new Object[]{pro.getName(), pro.getDescricao(), 
+                pro.getPrecoFinal(), "Nenhum Lance",
+               pro.getLeiloador().getNome()});
+            }else{
+                
+                 yourModel.addRow(new Object[]{pro.getName(), pro.getDescricao(), pro.getPrecoFinal(),
+                     pro.getUltimoLancador().getNome(),
+                pro.getLeiloador().getNome() });
+            }
         }
 
         
@@ -275,7 +300,7 @@ public class ProductList extends javax.swing.JFrame {
     }
 
     public void notificaCliente(String notificacao) {
-        System.out.println("------------sda");
+        
         this.notificacao.setText(notificacao);
     }
 
@@ -319,10 +344,12 @@ public class ProductList extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Label label2;
     private javax.swing.JTable meusProdutos;
+    private javax.swing.JLabel nomeCli;
     private java.awt.Label notificacao;
     private javax.swing.JButton registraLance;
     private javax.swing.JButton updateList;

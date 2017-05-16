@@ -34,8 +34,11 @@ public class Main {
  
     public static void criaIdenficacao(InterfaceServidor servidor, String nome) throws RemoteException, MalformedURLException, AlreadyBoundException {
         String name = ManagementFactory.getRuntimeMXBean().getName();
-        String[] idString= name.split("@");
-        id = Integer.parseInt(idString[0]);
+        //System.out.println("ID" + name);
+       String idString= name.replaceAll("\\D+", "");
+        id = Integer.parseInt(idString);
+        
+       // System.out.println("ID" + id);
         servidor.cadastrarRefCli(nome,new ClienteImpl(), id);
 
     }

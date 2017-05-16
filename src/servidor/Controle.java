@@ -69,7 +69,7 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
 //          p.getListaProduto().add(produto);
 
             listaLeiloesAtivos.add(produto);
-            Temporizador temporizador = new Temporizador(tempo, produto);
+            Temporizador temporizador = new Temporizador(tempo, produto, this);
             Thread thread = new Thread(temporizador);
             thread.start();
         }
@@ -99,7 +99,7 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
         cliInteressado = procuraCliente(idCliente);
 
         if (idCliente == prod.getLeiloador().getId()) {
-            cliInteressado.getReferenciaCliente().receberNotificacao("ERROR - Voce ão pode comprar seu proprio produto");
+            cliInteressado.getReferenciaCliente().receberNotificacao("ERROR - Voce não pode comprar seu proprio produto");
             return false;
         }
 
@@ -118,9 +118,13 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
             //Notificação de  clinetes
             if (prod.getProcessoInteressados().size() > 0) {
                 for (Clientes cliente : prod.getProcessoInteressados()) {
-                    cliente.getReferenciaCliente().receberNotificacao("ERROR - Outro cliente deu lance!");
+                    cliente.getReferenciaCliente().receberNotificacao(" Outro cliente deu lance no produto " + prod.getName());
                 }
+          
             }
+            
+            prod.getLeiloador().getReferenciaCliente().receberNotificacao(" Outro cliente deu lance no produto " + prod.getName());
+
             //Caso o cara nao esta na lista ainda
             if (indicator == 0) {
                 if (prod.getPrecoFinal() < valor) {
@@ -184,14 +188,26 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
     }
 
     synchronized public void finalizaLeilao(Produto produto) throws RemoteException {
+        if (produto.getUltimoLancador() == null) {
+            produto.getLeiloador().getReferenciaCliente().receberNotificacao("O leilao do produto " + produto.getName() + "foi encerrado e ninguém se interessou pelo produto.");
+
+        } else {
+            produto.getLeiloador().getReferenciaCliente().receberNotificacao("Voce leilou o produto " + produto.getName()
+                    + " para a pessoa " + produto.getUltimoLancador().getNome() + " \n no valor de " + produto.getPrecoFinal() + " reais.");
+            for (Clientes cli : produto.getProcessoInteressados()) {
+                cli.getReferenciaCliente().receberNotificacao("O cliente "
+                        + produto.getUltimoLancador().getNome() + " venceu o leilão do produto "
+                        + produto.getName() + " pelo valor negociado de " + produto.getPrecoFinal() + " reais.");
+            }
+
+            produto.setLeiloador(produto.getUltimoLancador());
+            produto.setPrecoInicial(produto.getPrecoFinal());
+            produto.setUltimoLancador(new Clientes());
+            produto.setProcessoInteressados(new ArrayList<>());
+
+        }
         Controle.listaLeiloesInativos.add(produto);
         Controle.listaLeiloesAtivos.remove(produto);
-
-        for (Clientes cli : produto.getProcessoInteressados()) {
-            cli.getReferenciaCliente().receberNotificacao("O cliente "
-                    + produto.getUltimoLancador().getNome() + " venceu o leilão do produto "
-                    + produto.getName() + " pelo valor negociado de " + produto.getPrecoFinal() + " reais.");
-        }
 
     }
 

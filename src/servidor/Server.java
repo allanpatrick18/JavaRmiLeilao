@@ -30,10 +30,11 @@ public class Server {
       
       
       try {
-     
+         //banco do nomes do seu registro
         Registry registry = LocateRegistry.createRegistry(4370);
+        //associa a interface ao seu nome
         registry.rebind("controle", Controle.getInstance());
-        //controle = (InterfaceCliente) registro.lookup("controle");
+        
         System.out.println("Servidor do banco iniciado!");
         } catch (RemoteException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);

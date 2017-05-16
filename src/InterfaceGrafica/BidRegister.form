@@ -101,21 +101,21 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Description:"/>
+        <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="descricao">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Current price:"/>
+        <Property name="text" type="java.lang.String" value="Pre&#xe7;o atual:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="What&#xb4;s your bid?"/>
+        <Property name="text" type="java.lang.String" value="Qual o seu lance?"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="valor">
@@ -136,7 +136,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Product:"/>
+        <Property name="text" type="java.lang.String" value="Produto:"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>

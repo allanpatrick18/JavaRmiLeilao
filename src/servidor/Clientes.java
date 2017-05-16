@@ -21,6 +21,9 @@ public class Clientes implements Serializable{
 //    private List<Produto> listaProduto  = new ArrayList<>();
     private InterfaceCliente referenciaCliente;
 
+    public Clientes() {
+    }
+
     public Clientes(InterfaceCliente referenciaCliente, Integer processoID, String nome) {
         this.referenciaCliente =  referenciaCliente;
         this.id = processoID;

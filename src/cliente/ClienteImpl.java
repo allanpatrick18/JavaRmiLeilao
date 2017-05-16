@@ -38,8 +38,8 @@ public class ClienteImpl extends UnicastRemoteObject implements InterfaceCliente
 
     @Override
     public void receberNotificacao(String msg) throws RemoteException {
-       System.out.println("-------sssssssssssss-----sda");
        productList.notificaCliente(msg);
+       productList.atualiza();
     }
     
     public Remote refInterface() throws RemoteException {
