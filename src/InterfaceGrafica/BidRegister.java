@@ -20,6 +20,9 @@ public class BidRegister extends javax.swing.JFrame {
         initComponents();
     }
 
+    
+   
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -157,6 +160,14 @@ public class BidRegister extends javax.swing.JFrame {
         //inicialMenu.setVisible(true);
     }//GEN-LAST:event_voltarActionPerformed
 
+    
+    public void adicionaValoresSobreProduto(String nome, String descri,
+            Integer preco, String Lancador, String leiloador){
+        
+        
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -193,6 +204,8 @@ public class BidRegister extends javax.swing.JFrame {
 //        });
     }
 
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

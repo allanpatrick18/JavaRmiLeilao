@@ -8,12 +8,14 @@ package InterfaceGrafica;
 import cliente.Main;
 import static cliente.Main.controle;
 import static cliente.Main.id;
+
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import servidor.Clientes;
 import servidor.Produto;
 
 /**
@@ -66,7 +68,7 @@ public class ProductList extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -173,20 +175,66 @@ public class ProductList extends javax.swing.JFrame {
     private void registraLanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registraLanceActionPerformed
 
         //Para saber a linha selecionada:
-
         Integer linha = meusProdutos.getSelectedRow(); //retorna um inteiro
+
+        int column = meusProdutos.getColumnCount();
         //Para pegar um valor da linha:
 
+        Object column1;
+        String nameProd = "";
+        String descriProd = "";
+        Integer ultimoPreco = 0;
+        String lancador = "";
+        String leiloeiro = "";
+        
         Produto produto;
-        if (linha != null) {
-            
-          //  produto = new Produto(meusProdutos.getValueAt(linha,0),meusProdutos.getValueAt(linha,1), meusProdutos.getValueAt(linha,2));
-             meusProdutos.getValueAt(linha,0); 
-            
-            bidRegister.setVisible(true);
-            this.setVisible(false);
-        } else {
+        if (linha >=0) {
 
+          
+                column1 = meusProdutos.getValueAt(linha, 0);
+                if (column1 instanceof String) {
+                    nameProd = (String) column1;
+                    
+                    System.out.println(nameProd);
+                }
+           
+        
+                column1 = meusProdutos.getValueAt(linha,1);
+                if (column1 instanceof String) {
+                    descriProd =  (String) column1;
+                       System.out.println(descriProd);
+                }   
+                
+                
+                column1 = meusProdutos.getValueAt(linha,2);
+                if (column1 instanceof Integer) {
+                    ultimoPreco =   (Integer)column1;
+                       System.out.println(ultimoPreco);
+                }   
+                
+                column1 = meusProdutos.getValueAt(linha,3);
+                if (column1 instanceof String) {
+                    lancador =  (String) column1;
+                       System.out.println(lancador);
+                }   
+                
+                   column1 = meusProdutos.getValueAt(linha,4);
+                if (column1 instanceof String) {
+                    leiloeiro =  (String) column1;
+                       System.out.println(leiloeiro);
+                }   
+         
+                bidRegister.setVisible(true);
+                this.setVisible(false);
+
+            
+            
+            produto = new Produto(nameProd, descriProd, ultimoPreco, lancador, leiloeiro);
+            
+            bidRegister.adicionaValoresSobreProduto(nameProd, descriProd, ultimoPreco, lancador, leiloeiro);
+            
+        
+        }else{
             JOptionPane.showConfirmDialog(rootPane, "Selecione um produto para dar o lance!");
         }
     }//GEN-LAST:event_registraLanceActionPerformed

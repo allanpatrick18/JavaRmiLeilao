@@ -22,15 +22,17 @@ public class Produto implements Serializable{
     private Integer tempoFinal;
     private List<Clientes> processoInteressados = new ArrayList<>();
     private Clientes ultimoLancador; //ultimo cara que deu o lance
+   private String ultimoLanca; //ultimo cara que deu o lance
     private Integer precoFinal;
     private Clientes leiloador;
+    private String leiloa;
 
-    public Produto(String name, String descricao, Integer precoFinal) {
+    public Produto(String name, String descricao, Integer precoFinal, String ultimoLancador, String leiloador) {
         this.name = name;
         this.descricao = descricao;
-      //  this.ultimoLancador = ultimoLancador;
+       this.ultimoLanca = ultimoLancador;
         this.precoFinal = precoFinal;
-      //  this.leiloador = leiloador;
+       this.leiloa = leiloador;
     }
 
     public Clientes getLeiloador() {

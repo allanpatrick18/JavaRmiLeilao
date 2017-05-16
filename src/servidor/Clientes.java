@@ -6,6 +6,7 @@
 package servidor;
 
 import interfaces.InterfaceCliente;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +14,8 @@ import java.util.List;
  *
  * @author allan
  */
-public class Clientes {
-    
+public class Clientes implements Serializable{
+    private static final long serialVersionUID = 9L;
     private int id;
     private String nome;
     private List<Produto> listaProduto  = new ArrayList<>();
