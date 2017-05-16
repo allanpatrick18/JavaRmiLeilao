@@ -160,7 +160,7 @@ public class AuctionRegister extends javax.swing.JFrame {
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
    
         this.setVisible(false);
-         prodList.setVisible(true);
+        prodList.setVisible(true);
 
     }//GEN-LAST:event_voltarActionPerformed
 

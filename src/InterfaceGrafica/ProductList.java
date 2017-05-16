@@ -264,7 +264,7 @@ public class ProductList extends javax.swing.JFrame {
         yourModel.getDataVector().removeAllElements();
         for (Produto pro : list) {
 
-            yourModel.addRow(new Object[]{pro.getName(), pro.getDescricao(), pro.getPrecoInicial(), "Nenhum Lance",
+            yourModel.addRow(new Object[]{pro.getName(), pro.getDescricao(), pro.getPrecoFinal(), "Nenhum Lance",
                 Main.nome
             });
 
@@ -275,6 +275,7 @@ public class ProductList extends javax.swing.JFrame {
     }
 
     public void notificaCliente(String notificacao) {
+        System.out.println("------------sda");
         this.notificacao.setText(notificacao);
     }
 

@@ -27,17 +27,16 @@ public class Main {
     
    public static InterfaceServidor  controle = null;
    public static Integer id;
-   public  static InterfaceCliente InterfaceCliente;
    public static String nome;
    public static ProductList productList;
    public static List<Produto> list = new ArrayList<>();
    
-   
+ 
     public static void criaIdenficacao(InterfaceServidor servidor, String nome) throws RemoteException, MalformedURLException, AlreadyBoundException {
         String name = ManagementFactory.getRuntimeMXBean().getName();
         String[] idString= name.split("@");
         id = Integer.parseInt(idString[0]);
-        servidor.cadastrarRefCli(nome,InterfaceCliente , id);
+        servidor.cadastrarRefCli(nome,new ClienteImpl(), id);
 
     }
 

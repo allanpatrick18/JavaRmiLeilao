@@ -48,7 +48,8 @@ public class Produto implements Serializable{
         this.name = name;
         this.descricao = descricao;
         this.precoInicial = precoInicial;
-        this.tempoFinal = precoInicial;
+        this.precoFinal = precoInicial;
+        this.tempoFinal = tempoFinal;
         this.leiloador = leiloador;
     }
 

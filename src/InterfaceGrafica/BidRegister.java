@@ -168,18 +168,22 @@ public class BidRegister extends javax.swing.JFrame {
                Logger.getLogger(BidRegister.class.getName()).log(Level.SEVERE, null, ex);
            }
         }
+       this.setVisible(false);
+       prodList.setVisible(true);
+       
     }//GEN-LAST:event_chamarLanceActionPerformed
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         this.setVisible(false);
-        //inicialMenu.setVisible(true);
+         prodList.setVisible(true);
+       
     }//GEN-LAST:event_voltarActionPerformed
 
     public void setDados(Produto produto) throws RemoteException {
 
         nomeProduto.setText(produto.getName());
         descricao.setText(produto.getDescricao());
-        preco.setText(produto.getPrecoInicial().toString());
+        preco.setText(produto.getPrecoFinal().toString());
         pro = produto;
        
 

@@ -5,6 +5,7 @@
  */
 package servidor;
 
+import static cliente.Main.controle;
 import interfaces.InterfaceCliente;
 import interfaces.InterfaceServidor;
 import java.net.MalformedURLException;
@@ -32,6 +33,7 @@ public class Server {
      
         Registry registry = LocateRegistry.createRegistry(4370);
         registry.rebind("controle", Controle.getInstance());
+        //controle = (InterfaceCliente) registro.lookup("controle");
         System.out.println("Servidor do banco iniciado!");
         } catch (RemoteException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
