@@ -5,6 +5,15 @@
  */
 package InterfaceGrafica;
 
+import static cliente.Main.controle;
+import static cliente.Main.id;
+import static cliente.Main.list;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import servidor.Produto;
+
 /**
  *
  * @author Jessica
@@ -15,14 +24,13 @@ public class BidRegister extends javax.swing.JFrame {
      * Creates new form BidRegister
      */
     ProductList prodList = null;
+    Produto pro;
+
     public BidRegister(ProductList prodList) {
-       this.prodList  = prodList;
+        this.prodList = prodList;
         initComponents();
     }
 
-    
-   
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,46 +41,44 @@ public class BidRegister extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        descricao = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        valor = new javax.swing.JTextField();
+        chamarLance = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        preco = new javax.swing.JLabel();
         voltar = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        nomeProduto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jLabel1.setText("Description:");
 
-        jLabel2.setText("...");
-
         jLabel3.setText("Current price:");
 
         jLabel5.setText("What´s your bid?");
 
-        jTextField1.setText("00,0");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        valor.setText("0");
+        valor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                valorActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Register bid");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        chamarLance.setText("Register bid");
+        chamarLance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                chamarLanceActionPerformed(evt);
             }
         });
 
         jLabel6.setText("Product:");
         jLabel6.setToolTipText("");
 
-        jLabel7.setText("00,0");
+        preco.setText("0");
 
         voltar.setText("Voltar");
         voltar.addActionListener(new java.awt.event.ActionListener() {
@@ -80,8 +86,6 @@ public class BidRegister extends javax.swing.JFrame {
                 voltarActionPerformed(evt);
             }
         });
-
-        jLabel8.setText("jLabel8");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,36 +97,39 @@ public class BidRegister extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(chamarLance))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
+                            .addComponent(nomeProduto)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel5)
                                 .addComponent(jLabel3)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(descricao, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel1)
                                 .addComponent(jLabel6)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
+                                    .addComponent(preco)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel4)
                                     .addGap(88, 88, 88))))))
                 .addGap(0, 65, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(valor, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel8)
+                .addComponent(nomeProduto)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(12, 12, 12)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(descricao, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,14 +138,14 @@ public class BidRegister extends javax.swing.JFrame {
                         .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel7)))
+                        .addComponent(preco)))
                 .addGap(26, 26, 26)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(chamarLance)
                     .addComponent(voltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -147,27 +154,37 @@ public class BidRegister extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void valorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_valorActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void chamarLanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chamarLanceActionPerformed
+       if (valor.getText() == null && valor.getText().equals("") && valor.getText().equals("0")) {
+            JOptionPane.showConfirmDialog(rootPane, "Informe o lance!");
+        } else {
+           try {
+               controle.darlance(id, pro.getId(), Integer.parseInt(valor.getText()));
+           } catch (RemoteException ex) {
+               Logger.getLogger(BidRegister.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        }
+    }//GEN-LAST:event_chamarLanceActionPerformed
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         this.setVisible(false);
         //inicialMenu.setVisible(true);
     }//GEN-LAST:event_voltarActionPerformed
 
-    
-    public void adicionaValoresSobreProduto(String nome, String descri,
-            Integer preco, String Lancador, String leiloador){
-        
-        
-        
+    public void setDados(Produto produto) throws RemoteException {
+
+        nomeProduto.setText(produto.getName());
+        descricao.setText(produto.getDescricao());
+        preco.setText(produto.getPrecoInicial().toString());
+        pro = produto;
+       
+
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -204,19 +221,18 @@ public class BidRegister extends javax.swing.JFrame {
 //        });
     }
 
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton chamarLance;
+    private javax.swing.JLabel descricao;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel nomeProduto;
+    private javax.swing.JLabel preco;
+    private javax.swing.JTextField valor;
     private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
 }

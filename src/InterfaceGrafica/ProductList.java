@@ -6,8 +6,10 @@
 package InterfaceGrafica;
 
 import cliente.Main;
+
 import static cliente.Main.controle;
 import static cliente.Main.id;
+import static cliente.Main.list;
 
 import java.rmi.RemoteException;
 import java.util.List;
@@ -38,6 +40,7 @@ public class ProductList extends javax.swing.JFrame {
         initComponents();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -174,78 +177,92 @@ public class ProductList extends javax.swing.JFrame {
 
     private void registraLanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registraLanceActionPerformed
 
-        //Para saber a linha selecionada:
-        Integer linha = meusProdutos.getSelectedRow(); //retorna um inteiro
-
-        int column = meusProdutos.getColumnCount();
-        //Para pegar um valor da linha:
-
-        Object column1;
-        String nameProd = "";
-        String descriProd = "";
-        Integer ultimoPreco = 0;
-        String lancador = "";
-        String leiloeiro = "";
-        
-        Produto produto;
-        if (linha >=0) {
-
-          
-                column1 = meusProdutos.getValueAt(linha, 0);
-                if (column1 instanceof String) {
-                    nameProd = (String) column1;
-                    
-                    System.out.println(nameProd);
-                }
-           
-        
-                column1 = meusProdutos.getValueAt(linha,1);
-                if (column1 instanceof String) {
-                    descriProd =  (String) column1;
-                       System.out.println(descriProd);
-                }   
-                
-                
-                column1 = meusProdutos.getValueAt(linha,2);
-                if (column1 instanceof Integer) {
-                    ultimoPreco =   (Integer)column1;
-                       System.out.println(ultimoPreco);
-                }   
-                
-                column1 = meusProdutos.getValueAt(linha,3);
-                if (column1 instanceof String) {
-                    lancador =  (String) column1;
-                       System.out.println(lancador);
-                }   
-                
-                   column1 = meusProdutos.getValueAt(linha,4);
-                if (column1 instanceof String) {
-                    leiloeiro =  (String) column1;
-                       System.out.println(leiloeiro);
-                }   
-         
-                bidRegister.setVisible(true);
-                this.setVisible(false);
-
+        try {
+            //Para saber a linha selecionada:
+       Integer linha = meusProdutos.getSelectedRow(); //retorna um inteiro
             
+      if(linha>=0){
+         bidRegister.setDados(list.get(linha));
+         bidRegister.setVisible(true);
+         this.setVisible(false);
+      }else{
+          JOptionPane.showConfirmDialog(rootPane, "Selecione um produto para dar o lance");
+      
+      }
             
-            produto = new Produto(nameProd, descriProd, ultimoPreco, lancador, leiloeiro);
-            
-            bidRegister.adicionaValoresSobreProduto(nameProd, descriProd, ultimoPreco, lancador, leiloeiro);
-            
-        
-        }else{
-            JOptionPane.showConfirmDialog(rootPane, "Selecione um produto para dar o lance!");
+//        int column = meusProdutos.getColumnCount();
+//        //Para pegar um valor da linha:
+//
+//        Object column1;
+//        String nameProd = "";
+//        String descriProd = "";
+//        Integer ultimoPreco = 0;
+//        String lancador = "";
+//        String leiloeiro = "";
+//        
+//        Produto produto;
+//        if (linha >=0) {
+//
+//          
+//                column1 = meusProdutos.getValueAt(linha, 0);
+//                if (column1 instanceof String) {
+//                    nameProd = (String) column1;
+//                    
+//                    System.out.println(nameProd);
+//                }
+//
+//        
+//                column1 = meusProdutos.getValueAt(linha,1);
+//                if (column1 instanceof String) {
+//                    descriProd =  (String) column1;
+//                       System.out.println(descriProd);
+//                }
+//
+//                
+//                column1 = meusProdutos.getValueAt(linha,2);
+//                if (column1 instanceof Integer) {
+//                    ultimoPreco =   (Integer)column1;
+//                       System.out.println(ultimoPreco);
+//                }
+//                
+//                column1 = meusProdutos.getValueAt(linha,3);
+//                if (column1 instanceof String) {
+//                    lancador =  (String) column1;
+//                       System.out.println(lancador);
+//                }
+//                
+//                   column1 = meusProdutos.getValueAt(linha,4);
+//                if (column1 instanceof String) {
+//                    leiloeiro =  (String) column1;
+//                       System.out.println(leiloeiro);
+//                }
+//         
+//                bidRegister.setVisible(true);
+//                this.setVisible(false);
+//
+//
+//            
+//            produto = new Produto(nameProd, descriProd, ultimoPreco, lancador, leiloeiro);
+//            
+//            bidRegister.adicionaValoresSobreProduto(nameProd, descriProd, ultimoPreco, lancador, leiloeiro);
+//
+//        
+//        }else{
+//            JOptionPane.showConfirmDialog(rootPane, "Selecione um produto para dar o lance!");
+//        }
+        } catch (RemoteException ex) {
+            Logger.getLogger(ProductList.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_registraLanceActionPerformed
 
     public void atualiza() throws RemoteException {
-        List<Produto> p = controle.listarProdutos();
+//        List<Produto> p = controle.listarProdutos();
+        list = controle.listarProdutos();
 
         DefaultTableModel yourModel = (DefaultTableModel) meusProdutos.getModel();
 
         yourModel.getDataVector().removeAllElements();
-        for (Produto pro : p) {
+        for (Produto pro : list) {
 
             yourModel.addRow(new Object[]{pro.getName(), pro.getDescricao(), pro.getPrecoInicial(), "Nenhum Lance",
                 Main.nome
@@ -253,7 +270,7 @@ public class ProductList extends javax.swing.JFrame {
 
         }
 
-        p.clear();
+        
 
     }
 

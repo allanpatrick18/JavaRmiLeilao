@@ -44,7 +44,7 @@ public class AuctionRegister extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         registar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        precoInial = new javax.swing.JTextField();
+        precoInicial = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         tempo = new javax.swing.JTextField();
         voltar = new javax.swing.JButton();
@@ -78,11 +78,11 @@ public class AuctionRegister extends javax.swing.JFrame {
 
         jLabel3.setText("Initial Price:");
 
-        precoInial.setText("00,0");
-        precoInial.setToolTipText("");
-        precoInial.addActionListener(new java.awt.event.ActionListener() {
+        precoInicial.setText("00,0");
+        precoInicial.setToolTipText("");
+        precoInicial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                precoInialActionPerformed(evt);
+                precoInicialActionPerformed(evt);
             }
         });
 
@@ -119,7 +119,7 @@ public class AuctionRegister extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addComponent(jLabel1)
                         .addComponent(nomeProduto)
-                        .addComponent(precoInial)
+                        .addComponent(precoInicial)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
@@ -137,7 +137,7 @@ public class AuctionRegister extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(precoInial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(precoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -153,9 +153,9 @@ public class AuctionRegister extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void precoInialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precoInialActionPerformed
+    private void precoInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precoInicialActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_precoInialActionPerformed
+    }//GEN-LAST:event_precoInicialActionPerformed
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
    
@@ -168,7 +168,7 @@ public class AuctionRegister extends javax.swing.JFrame {
         if (nomeProduto != null && nomeProduto != null) {
             try {
                 boolean v = controle.cadastrarLeilao(id, nomeProduto.getText(), 
-                        Integer.parseInt(precoInial.getText()), despricaoProduto.getText(),
+                        Integer.parseInt(precoInicial.getText()), despricaoProduto.getText(),
                         Integer.parseInt(tempo.getText()));
                if(v){ JOptionPane.showMessageDialog(null,"Produto Cadastrado com sucesso!");}
             } catch (RemoteException ex) {
@@ -241,7 +241,7 @@ public class AuctionRegister extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nomeProduto;
-    private javax.swing.JTextField precoInial;
+    private javax.swing.JTextField precoInicial;
     private javax.swing.JButton registar;
     private javax.swing.JTextField tempo;
     private javax.swing.JButton voltar;

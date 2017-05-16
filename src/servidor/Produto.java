@@ -22,7 +22,7 @@ public class Produto implements Serializable{
     private Integer tempoFinal;
     private List<Clientes> processoInteressados = new ArrayList<>();
     private Clientes ultimoLancador; //ultimo cara que deu o lance
-   private String ultimoLanca; //ultimo cara que deu o lance
+    private String ultimoLanca; //ultimo cara que deu o lance
     private Integer precoFinal;
     private Clientes leiloador;
     private String leiloa;
@@ -48,7 +48,7 @@ public class Produto implements Serializable{
         this.name = name;
         this.descricao = descricao;
         this.precoInicial = precoInicial;
-        this.tempoFinal = tempoFinal;
+        this.tempoFinal = precoInicial;
         this.leiloador = leiloador;
     }
 
@@ -67,17 +67,7 @@ public class Produto implements Serializable{
     public void setUltimoLancador(Clientes ultimoLancador) {
         this.ultimoLancador = ultimoLancador;
     }
-
-    public Integer getPrecoFinal() {
-        return precoFinal;
-    }
-
-    public void setPrecoFinal(Integer precoFinal) {
-        this.precoFinal = precoFinal;
-    }
-
-  
-
+ 
 
     public Integer getId() {
         return id;
@@ -118,6 +108,16 @@ public class Produto implements Serializable{
     public void setTempoFinal(Integer tempoFinal) {
         this.tempoFinal = tempoFinal;
     }
+
+    public Integer getPrecoFinal() {
+        return precoFinal;
+    }
+
+    public void setPrecoFinal(Integer precoFinal) {
+        this.precoFinal = precoFinal;
+    }
+    
+    
 
     
     

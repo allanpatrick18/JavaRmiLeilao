@@ -30,21 +30,20 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="voltar" min="-2" pref="86" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="chamarLance" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                          <Component id="nomeProduto" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField1" min="-2" pref="160" max="-2" attributes="0"/>
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel2" min="-2" pref="177" max="-2" attributes="0"/>
+                              <Component id="descricao" min="-2" pref="177" max="-2" attributes="0"/>
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                  <Component id="preco" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
@@ -55,19 +54,24 @@
               </Group>
               <EmptySpace min="0" pref="65" max="32767" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <Component id="valor" min="-2" pref="160" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace pref="15" max="32767" attributes="0"/>
+              <EmptySpace pref="30" max="32767" attributes="0"/>
               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+              <Component id="nomeProduto" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" pref="68" max="-2" attributes="0"/>
+              <Component id="descricao" min="-2" pref="68" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -77,16 +81,16 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                      <Component id="preco" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+              <Component id="valor" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="chamarLance" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="voltar" alignment="3" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -100,10 +104,7 @@
         <Property name="text" type="java.lang.String" value="Description:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="..."/>
-      </Properties>
+    <Component class="javax.swing.JLabel" name="descricao">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -117,20 +118,20 @@
         <Property name="text" type="java.lang.String" value="What&#xb4;s your bid?"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="valor">
       <Properties>
-        <Property name="text" type="java.lang.String" value="00,0"/>
+        <Property name="text" type="java.lang.String" value="0"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="valorActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="chamarLance">
       <Properties>
         <Property name="text" type="java.lang.String" value="Register bid"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chamarLanceActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -139,9 +140,9 @@
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel7">
+    <Component class="javax.swing.JLabel" name="preco">
       <Properties>
-        <Property name="text" type="java.lang.String" value="00,0"/>
+        <Property name="text" type="java.lang.String" value="0"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="voltar">
@@ -152,10 +153,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="voltarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel8">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel8"/>
-      </Properties>
+    <Component class="javax.swing.JLabel" name="nomeProduto">
     </Component>
   </SubComponents>
 </Form>

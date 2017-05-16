@@ -19,6 +19,9 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 import servidor.Controle;
 import interfaces.InterfaceCliente;
+import java.util.ArrayList;
+import java.util.List;
+import servidor.Produto;
 
 public class Main {
     
@@ -27,6 +30,8 @@ public class Main {
    public  static InterfaceCliente InterfaceCliente;
    public static String nome;
    public static ProductList productList;
+   public static List<Produto> list = new ArrayList<>();
+   
    
     public static void criaIdenficacao(InterfaceServidor servidor, String nome) throws RemoteException, MalformedURLException, AlreadyBoundException {
         String name = ManagementFactory.getRuntimeMXBean().getName();
@@ -60,5 +65,7 @@ public class Main {
         
         
     }
+
+
 
 }

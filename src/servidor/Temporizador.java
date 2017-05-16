@@ -33,10 +33,7 @@ public class Temporizador extends Thread{
             if(!Controle.listaLeiloesAtivos.isEmpty()){
                 if(produto.getUltimoLancador()!= null)
                 {
-                   
-                    
-                    
-                    
+                  
                 }else{
                     System.out.println("Erro : Nenhum apostador no produto!");
                 

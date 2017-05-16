@@ -25,6 +25,7 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
     
     private static final long serialVersionUID = 1L;
     private static InterfaceServidor inface = null;
+     private static List<Integer> leiloes = new ArrayList<>();
     private static List<Clientes> listaClientesAtivos = new ArrayList<>();
     public static List<Produto> listaLeiloesAtivos = new ArrayList<>(); //mesma coisa que produtos
     public static List<Produto> listaLeiloesInativos = new ArrayList<>();
@@ -65,14 +66,14 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
         if (p != null) {
             incrIDProd++;
             Produto produto = new Produto(incrIDProd, nomeProduto, descricao, precoIncial, tempo, p);
-            p.getListaProduto().add(produto);
+//            p.getListaProduto().add(produto);
             
             listaLeiloesAtivos.add(produto);
             
-            Temporizador temporizador = new Temporizador(tempo, produto);
-            Thread thread = new Thread(temporizador);
-            
-            thread.start();
+//            Temporizador temporizador = new Temporizador(tempo, produto);
+//            Thread thread = new Thread(temporizador);
+//            
+//            thread.start();
         }
         
         return true;
@@ -112,8 +113,9 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
             }
 
             //Caso o cara nao esta na lista ainda
+            int teste =prod.getPrecoInicial();
             if (indicator == 0) {                
-                if (prod.getPrecoFinal() < valor) {
+                if (teste < valor) {
                     prod.setPrecoFinal(valor);
                     prod.getProcessoInteressados().add(cliInteressado);
                     prod.setUltimoLancador(cliInteressado);                    
@@ -150,14 +152,14 @@ public class Controle extends UnicastRemoteObject implements InterfaceServidor {
         return null;
     }
     
-    private List<Produto> procuraProdutosdeUmCliente(int idCliente) {
-        for (Clientes p : listaClientesAtivos) {
-            if (idCliente == p.getId()) {
-                return p.getListaProduto();
-            }
-        }
-        return null;
-    }
+//    private List<Produto> procuraProdutosdeUmCliente(int idCliente) {
+//        for (Clientes p : listaClientesAtivos) {
+//            if (idCliente == p.getId()) {
+//                return p.getListaProduto();
+//            }
+//        }
+//        return null;
+//    }
     
     private Produto procuraProdutos(int idProduto) {
         for (Produto p : listaLeiloesAtivos) {

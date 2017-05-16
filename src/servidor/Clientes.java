@@ -18,7 +18,7 @@ public class Clientes implements Serializable{
     private static final long serialVersionUID = 9L;
     private int id;
     private String nome;
-    private List<Produto> listaProduto  = new ArrayList<>();
+//    private List<Produto> listaProduto  = new ArrayList<>();
     private InterfaceCliente referenciaCliente;
 
     public Clientes(InterfaceCliente referenciaCliente, Integer processoID, String nome) {
@@ -52,14 +52,14 @@ public class Clientes implements Serializable{
         this.nome = nome;
     }
 
-    public List<Produto> getListaProduto() {
-        return listaProduto;
-    }
-
-    public void setListaProduto(List<Produto> listaProduto) {
-        this.listaProduto = listaProduto;
-    }
-   
+//    public List<Produto> getListaProduto() {
+//        return listaProduto;
+//    }
+//
+//    public void setListaProduto(List<Produto> listaProduto) {
+//        this.listaProduto = listaProduto;
+//    }
+//   
     
     
 }
